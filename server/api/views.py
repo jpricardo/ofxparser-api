@@ -5,8 +5,6 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.renderers import JSONRenderer
 from rest_framework.response import Response
 
-
-
 from server.api.serializers import UserSerializer, GroupSerializer, FileSerializer
 
 # Create your views here.
@@ -23,25 +21,10 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-# class ToCsv(viewsets.ReadOnlyModelViewSet):
-#
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes = [permissions.IsAuthenticated]
 
 @api_view(['POST'])
 @renderer_classes([JSONRenderer])
 def get_transactions(request):
     data = request.data
-    if request.method == 'POST':
-        file_data = {
-            'filename': data['filename'],
-            'base64content': data['base64content'],
-            'format': data['format']
-        }
-        # try:
-        file = FileSerializer(file_data).convert()
-        return Response(file)
-        # except Exception as e:
-        #     print(e)
-        #     return HttpResponse('Deu merda!')
+    file = FileSerializer(data).convert()
+    return Response(file)
