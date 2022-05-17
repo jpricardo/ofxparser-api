@@ -34,7 +34,7 @@ Transactions are all the account movements present inside the .ofx report data.
 
 <tr>
 <td>Authentication Required</td>
-<td><code>TRUE</code></td>
+<td><code>false</code></td>
 </tr>
 </tbody>
 </table>
